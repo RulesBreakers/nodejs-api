@@ -26,4 +26,4 @@ jobs:
         server: 185.161.10.160
         username: ${{secrets.USERNAME}}
         password: ${{secrets.PASSWORD}}
-        server-dir: /
+        server-dir: /bin
