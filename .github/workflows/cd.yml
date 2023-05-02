@@ -1,0 +1,29 @@
+# This is a basic workflow to help you get started with Actions
+
+name: CD
+
+# Controls when the workflow will run
+on:
+  # Triggers the workflow on push or pull request events but only for the "main" branch
+  push:
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
+
+jobs:
+  web-deploy:
+    name: Deploy app api express
+    
+    runs-on: ubuntu-latest
+    
+    steps:
+    - name: Refresh all data
+      uses: actions/checkout@v2
+      
+    - name: Sync files
+      uses: SamKirkland/FTP-Deploy-Action@4.1.0
+      with: 
+        server: rulesbreakers.madagascar.webcup.hodi.host/
+        username: ${{secrets.USERNAME}}
+        password: ${{secrets.PASSWORD}}
+        server-dir: /
