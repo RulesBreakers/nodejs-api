@@ -5,7 +5,8 @@ var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 var cors = require("cors");
 
-var indexRouter = require('./controller/HealthController');
+var indexRouter = require('./controller/index');
+var healthRouter = require('./controller/HealthController');
 
 var app = express();
 
@@ -20,7 +21,8 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
-app.use('/', indexRouter);
+app.use('/backend', indexRouter);
+app.use("/backend/ping", healthRouter)
 
 
 app.use(function(req, res, next) {
