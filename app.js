@@ -6,7 +6,8 @@ var logger = require('morgan');
 var cors = require("cors");
 
 var indexRouter = require('./controller/index');
-var healthRouter = require('./controller/HealthController');
+var healthRouter = require('./controller/healthController');
+var userRouter = require('./controller/userController')
 
 var app = express();
 
@@ -23,6 +24,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/backend', indexRouter);
 app.use("/backend/ping", healthRouter)
+app.use("/backend/users", userRouter)
 
 
 app.use(function(req, res, next) {
