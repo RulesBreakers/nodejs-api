@@ -4,6 +4,7 @@ var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 var cors = require("cors");
+const appUrl = "/backend"
 
 var indexRouter = require('./controller/index');
 var healthRouter = require('./controller/healthController');
@@ -22,9 +23,9 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
-app.use('/backend', indexRouter);
-app.use("/backend/ping", healthRouter)
-app.use("/backend/users", userRouter)
+app.use(`${appUrl}/`, indexRouter);
+app.use(`${appUrl}/ping/`, healthRouter)
+app.use(`${appUrl}/users/`, userRouter)
 
 
 app.use(function(req, res, next) {

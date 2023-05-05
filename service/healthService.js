@@ -1,7 +1,7 @@
 const { HealthRepository } = require("../repository/healthRepository");
 
 const HealthService = {
-    ping: (req, res) => res.status(200).json(HealthRepository.ping())
+    ping: (req, res) => res.send(HealthRepository.ping())
 }
 
 module.exports = { HealthService }
