@@ -1,5 +1,5 @@
 const HealthRepository = {
-    ping : () => "It's ok!"
+    ping : () => "Health Connection"
 }
 
 
