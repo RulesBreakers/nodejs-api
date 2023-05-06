@@ -46,7 +46,7 @@ app.use(passport.session());
 
 app.use(`${appUrl}/`, indexRouter);
 app.use(`${appUrl}/ping/`, healthRouter)
-app.use(`${appUrl}/test/`, userRouter)
+app.use(`${appUrl}/users/`, userRouter)
 app.use(`${appUrl}/login/`, securityRouter);
 app.use(`${appUrl}/dreams/`, dreamRouter);
 
