@@ -14,6 +14,8 @@ var healthRouter = require('./controller/healthController');
 var userRouter = require('./controller/userController');
 var securityRouter = require('./controller/securityController');
 var dreamRouter = require('./controller/dreamController');
+const { sequelize } = require('./repository/conf/SequelizeConf');
+const SequelizeStore = require('connect-session-sequelize')(session.Store);
 
 
 var app = express();
@@ -30,6 +32,10 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 app.use(session({
   secret: 'secretpassphrase',
+  store: new SequelizeStore({
+    db: sequelize,
+    tableName: 'Sessions'
+  }),
   resave: false,
   saveUninitialized: false
 }));
@@ -40,7 +46,7 @@ app.use(passport.session());
 
 app.use(`${appUrl}/`, indexRouter);
 app.use(`${appUrl}/ping/`, healthRouter)
-app.use(`${appUrl}/auth/`, userRouter)
+app.use(`${appUrl}/users/`, userRouter)
 app.use(`${appUrl}/login/`, securityRouter);
 app.use(`${appUrl}/dreams/`, dreamRouter);
 
