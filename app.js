@@ -13,6 +13,7 @@ var indexRouter = require('./controller/index');
 var healthRouter = require('./controller/healthController');
 var userRouter = require('./controller/userController');
 var securityRouter = require('./controller/securityController');
+var dreamRouter = require('./controller/dreamController');
 
 
 var app = express();
@@ -41,6 +42,7 @@ app.use(`${appUrl}/`, indexRouter);
 app.use(`${appUrl}/ping/`, healthRouter)
 app.use(`${appUrl}/users/`, userRouter)
 app.use(`${appUrl}/login/`, securityRouter);
+app.use(`${appUrl}/dreams/`, dreamRouter);
 
 
 app.use(function(req, res, next) {

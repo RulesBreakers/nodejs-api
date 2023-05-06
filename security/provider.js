@@ -2,12 +2,13 @@ const express = require("express");
 const passport = require('passport');
 const { UserService } = require("../service/userService");
 const LocalStrategy = require('passport-local').Strategy;
+const bcrypt = require("bcrypt");
 
 passport.use(new LocalStrategy(
     async (username, password, done) => {
-      const authenticatedUser = await UserService.getAuthenticatedUser();
-      if (username === authenticatedUser?.name && password === 'doe') {
-        return done(null, { username: authenticatedUser?.name });
+      const authenticatedUser = await UserService.getAuthenticatedUser(username);
+      if (username === authenticatedUser?.userName && bcrypt.compare(password, authenticatedUser?.password)) {
+        return done(null, authenticatedUser);
       } else {
         return done(null, false, { message: 'Mauvaises informations d\'identification.' });
       }
@@ -15,7 +16,7 @@ passport.use(new LocalStrategy(
   ));
   
 passport.serializeUser((user, done) => {
-    done(null, user.username);
+    done(null, user.userName);
 });
   
 passport.deserializeUser((username, done) => {

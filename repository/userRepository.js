@@ -1,14 +1,21 @@
 const { User } = require("../model/user");
-let defaultUserId = 1;
 
 const UserRepository = {
-    findAll : async ()=>{
-        const user = await User.findAll();
+    findById : async (userId)=>{
+        const user = await User.findByPk(userId);
         return user;
     },
-    getAuthenticatedUser : async ()=>{
-        const authenticatedUser = await User.findByPk(defaultUserId);
+    getAuthenticatedUser : async (username)=>{
+        const authenticatedUser = await User.findOne({
+            where: {
+                userName: username
+            }
+        });
         return authenticatedUser.dataValues;
+    },
+    create: async(user)=>{
+        const saved = await User.create(user);
+        return saved;
     }
 }
 
