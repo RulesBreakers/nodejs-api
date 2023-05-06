@@ -3,10 +3,7 @@ const { sequelize } = require("./conf/SequelizeConf");
 
 const EventInfoRepository = {
     findAll : async ()=>{
-        const eventInfos = await EventInfo.findAll({
-            order : sequelize.random(),
-            limit: 7
-        });
+        const eventInfos = await EventInfo.findAll();
         return eventInfos;
     }
 }
