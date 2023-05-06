@@ -11,6 +11,9 @@ const Dream = sequelize.define('Dream', {
     createdAt: {
         type: TIME,
         defaultValue: new Date().toLocaleDateString()
+    },
+    userId : {
+        type : INTEGER   
     }
 })
 

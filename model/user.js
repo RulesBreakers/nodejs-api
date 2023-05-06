@@ -24,8 +24,8 @@ User.beforeCreate(async (user, options) => {
     const salt = await bcrypt.genSalt(10);
     user.password = await bcrypt.hash(user.password, salt);
   });
-  
-User.hasMany(Dream, { foreignKey: "userid" })
+
+User.hasMany(Dream, { foreignKey: "userId" })
 User.sync();
 
 module.exports = { User }

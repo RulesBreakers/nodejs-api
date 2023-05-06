@@ -5,5 +5,7 @@ var router = express.Router();
 
 
 router.get('/', ensureAuthenticated, DreamService.getDreams);
+//router.post('/', ensureAuthenticated, DreamService.createDream);
+router.post('/', DreamService.createDream);
 
 module.exports = router;
