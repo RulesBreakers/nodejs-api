@@ -5,8 +5,8 @@ const { UserService } = require('../service/userService');
 var router = express.Router();
 
 router.post('/', UserService.createUser);
-router.get('/:id', ensureAuthenticated,  UserService.getUserById);
-router.get("/:id/dreams", ensureAuthenticated, DreamService.getDreamsByUserId)
+router.get('/:id', /*ensureAuthenticated,*/  UserService.getUserById);
+router.get("/:id/dreams", /*ensureAuthenticated,*/ DreamService.getDreamsByUserId)
 router.post('/:id/dreams', /*ensureAuthenticated,*/ DreamService.createDream);
 
 module.exports = router;
