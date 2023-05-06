@@ -4,11 +4,16 @@ var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 var cors = require("cors");
+const session = require('express-session');
+const { passport } = require('./security/provider');
+
 const appUrl = "/backend"
 
 var indexRouter = require('./controller/index');
 var healthRouter = require('./controller/healthController');
-var userRouter = require('./controller/userController')
+var userRouter = require('./controller/userController');
+var securityRouter = require('./controller/securityController');
+
 
 var app = express();
 
@@ -22,10 +27,20 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
+app.use(session({
+  secret: 'secretpassphrase',
+  resave: false,
+  saveUninitialized: false
+}));
+
+
+app.use(passport.initialize());
+app.use(passport.session());
 
 app.use(`${appUrl}/`, indexRouter);
 app.use(`${appUrl}/ping/`, healthRouter)
 app.use(`${appUrl}/users/`, userRouter)
+app.use(`${appUrl}/login/`, securityRouter);
 
 
 app.use(function(req, res, next) {
