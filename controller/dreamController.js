@@ -4,6 +4,6 @@ const { DreamService } = require('../service/dreamService');
 var router = express.Router();
 
 
-router.get('/', ensureAuthenticated, DreamService.getDreams);
+router.get('/', /*ensureAuthenticated,*/ DreamService.getDreams);
 
 module.exports = router;
