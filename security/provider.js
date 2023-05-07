@@ -33,10 +33,7 @@ const ensureAuthenticated = (req, res, next) => {
 };
 
 const AuthProvider = {
-    authenticate: passport.authenticate('local', {
-        successRedirect: '/dashboard',
-        failureRedirect: '/backend/login'
-    }),
+    authenticate: passport.authenticate('local'),
     logout : (req, res) => {
       req.logout();
       res.redirect('/backend/login');

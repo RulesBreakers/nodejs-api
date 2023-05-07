@@ -6,7 +6,9 @@ router.get('/', (req, res) => {
     res.send('<form action="/backend/login" method="POST"><input type="text" name="username"><br><input type="password" name="password"><br><input type="submit" value="Connexion"></form>');
 });
 
-router.post('/', AuthProvider.authenticate);
+router.post('/', AuthProvider.authenticate, function(req, res) {
+    res.status(200).json({ message: 'Login successful!' });
+  });
 router.get('/logout', AuthProvider.logout);
 
 module.exports = router;
